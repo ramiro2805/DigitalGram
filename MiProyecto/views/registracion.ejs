@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body>
+    <% if (locals.user != null) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/headerDeslogueado') %>
+    <% } %>
+    
+    <main>
+        <section class="center main-content">
+            <h1>Registrate</h1>
+            
+            <form action="/register/store" method="post">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password">
+
+                <label for="Name">Nombre completo:</label>
+                <input type="text" id="Name" name="name" required>
+
+                <label for="fecha">Fecha de nacimiento:</label>
+                <input type="date" id="fecha_nac" name="fecha" required>
+
+                <label for="dni">DNI:</label>
+                <input type="number" id="DNI" name="dni" required>
+
+                <label for="foto">Imagen de perfil:</label>
+                <input type="text" id="fotoPerfil", name="foto">
+
+                <% if(locals.errors){  %> 
+                    <p class= “error”> <%= errors.message %> </p>
+                 <% } %>
+
+                <button type="submit">Registrarse</button>
+            </form>
+        </section>
+    </main>
+
+    <%- include('./partials/footer') %>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body>
+    <% if (locals.user != null) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/headerDeslogueado') %>
+    <% } %>
+           
+    <main>
+        
+        <div class="user-detail container">
+            <section class="top main-content">
+                
+                    <img class="profile" src="<%= locals.user.foto %>" alt="">
+                
+                
+                
+                <div class="info-usuario">
+                    <p><%= locals.user.nombre%></p>
+                    <p><%=locals.user.apellido%></p>
+                    <p><%=locals.user.fecha_nac%></p>
+                
+                    
+                    <ul class="meta">
+                        <li><%= usuario.usuarioPosteo.length %> Publicaciones</li>
+                        <li>200 Seguidores</li>
+                        <li>300 Seguidos</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="bottom">
+                <% if (usuario.usuarioPosteo.length>0) { %>
+                    <!-- test -->
+                    <% for( let i=0; i < usuario.usuarioPosteo.length; i++ ) { %>
+                        <article class="post">
+                            <a href="/posteos/detallePost/id/<%= usuario.usuarioPosteo[i].id_posteo %>">
+                                <img src="<%= usuario.usuarioPosteo[i].foto %>" alt="">
+                            </a>
+                            <p><%= usuario.usuarioPosteo[i].pie %></p>
+                        </article>
+                    <% } %>
+                <% } %>
+                       
+            </section>
+        </div>
+    </main>
+
+    <%- include('./partials/footer') %>
+
+</body>
+
+</html>

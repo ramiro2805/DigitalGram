@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body>
+  <% if (locals.user != null) { %>
+    <%- include('./partials/headerLogueado') %>
+<% } else { %>
+    <%- include('./partials/headerDeslogueado') %>
+<% } %>
+
+  <main>
+    <section class="center main-content">
+      <h1>Login</h1>
+      
+      <form method="post" action="/login/store">
+        <div>
+          <label for="username"></label>
+          <input type="email" name="email" placeholder="Nombre de usuario"></input>
+        </div>
+        
+        <div>
+          <label for="password"></label>
+          <input type="password" name="password" required="required" placeholder="Contraseña"></input>
+        </div>
+        
+        <div>
+          <input type="submit" class="button" title="Sign In" value="Iniciar sesión"></input>
+        </div>
+                    
+        <div>
+          <input type="checkbox" id="rememberme" name="rememberme">
+          <label for="rememberme">Recordarme</label>
+        </div>
+        
+        <% if(locals.errors){  %> 
+          <p class= “error”> <%= errors.message %> </p>
+        <% } %>
+        
+      </form>
+    </section>
+  </main>
+
+  <%- include('./partials/footer') %>
+
+</body>
+
+</html>

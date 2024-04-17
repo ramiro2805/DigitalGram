@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body>
+    <% if (locals.user != null) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/headerDeslogueado') %>
+    <% } %>
+    
+    <main>
+        <section class="center main-content">
+            <% if(locals.errors){  %> 
+                <p class= 'error'> <%= errors.message %> </p>
+
+            <% } else { %>
+             
+                <% for( let i=0; i < usuarios.length; i++ ) { %>
+                    <div class="info-usuario ">
+                        <img src="<%= usuarios[i].foto%>" alt="">
+                        <h4>
+                            <a href='/usuarios/detalleUsuario/id/<%= usuarios[i].id_usuario %>'> <%= usuarios[i].nombre%></a>
+                        </h4>
+                    </div>
+                <% } %>  
+             <% } %>
+                 
+        </section>
+
+    </main>
+            
+    <%- include('./partials/footer') %>
+
+</body>
+
+</html>

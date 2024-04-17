@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+    <body>
+        <% if (locals.user !=null) { %>
+            <%- include('./partials/headerLogueado') %>
+                <% } else { %>
+                    <%- include('./partials/headerDeslogueado') %>
+                        <% } %>
+
+                            <main>
+                                <div class="user-detail container">
+                                    <section class="top main-content">
+                                        <img class="profile" src="<%= usuario.foto  %>" alt="">
+
+                                        <div class="info-usuario">
+                                            <p>
+                                                <%= usuario.nombre%>
+                                            </p>
+
+                                            <ul class="meta">
+                                                <li>
+                                                    <%= usuario.usuarioPosteo.length %> Publicaciones
+                                                </li>
+                                                <li>200 Seguidores</li>
+                                                <li>300 Seguidos</li>
+                                            </ul>
+                                        </div>
+                                    </section>
+
+                                    <section class="bottom">
+                                        <% for( let i=0; i < usuario.usuarioPosteo.length; i++ ) { %>
+                                            <section class="canc"></section>
+                                            <article class="post">
+                                   
+                                                <a
+                                                    href='/posteos/detallePost/id/<%= usuario.usuarioPosteo[i].id_posteo %>'>
+                                                    <img class="photo" src="<%= usuario.usuarioPosteo[i].foto %>" alt="">
+                                                </a>
+                                                <p>
+                                                    <%=usuario.usuarioPosteo[i].pie %>
+                                                </p>
+                                            
+                                            </article>
+
+                                            <% }%>
+                                    </section>
+                                </section>
+
+                            </main>
+
+                            <%- include('./partials/footer') %>
+
+    </body>
+
+</html>

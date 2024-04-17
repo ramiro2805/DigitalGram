@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body>
+    <% if (locals.user != null) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/headerDeslogueado') %>
+    <% } %>
+
+    <main>
+        <section class="center main-content">
+            <h1>Editar perfil</h1>
+            
+            <form action="/usuarios/editProfile/store" method="POST">
+                <label for="email">Cambiar email:</label>
+                <input type="text" id="email" name="email" value="<%=usuario.email %>">
+
+                <label for="password">Cambiar contraseña:</label>
+                <input type="password" id="password" name="password" >
+
+                <label for="Name">Cambiar apodo:</label>
+                <input type="text" id="Name" name="Name" value="<%=usuario.nombre %>">
+
+                <label for="fecha">Cambiar fecha de nacimiento:</label>
+                <input type="date" id="fecha_nac" name="fecha" value="<%=usuario.fecha_nac %>">
+
+                <label for="foto">Cambiar foto de perfil:</label>
+                <input type="text" id="fotoPerfil" name="foto" value="<%=usuario.foto %>">
+
+                <button type="submit">Editar</button>
+            </form>
+        </section>
+    </main>
+
+    <%- include('./partials/footer') %>
+
+</body>
+
+</html>

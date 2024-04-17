@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body>
+    <% if (locals.user != null) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/headerDeslogueado') %>
+    <% } %>
+    <main>
+        <div class="post-detail container">
+            
+            <section class="center main-content post">
+                <% if (locals.user != undefined && locals.user.id_usuario == post.posteoUsuario.id_usuario){%>
+                    <div class="borrarPost">
+                        <form action="/borrarPost/id/<%= post.id_posteo %>">
+                            <button type="submit">Borrar Post</button>
+                        </form>
+                    </div>
+                    <div class="editarPost">
+                        <form action="editarPost/id/<%= post.id_posteo %>">
+                            <label for="img">Imagen</label>
+                            <input type="image" name="img">
+                            <label for="pie">Pie de foto:</label>
+                            <input type="text" name="pie" >
+                        </form>
+                    </div>
+                    <% } %>
+                <div class="info-usuario">
+                    <img src="<%= post.posteoUsuario.foto %>" alt="">
+                    <p>
+                        <a href='/usuarios/detalleUsuario/id/<%= post.posteoUsuario.id_usuario %>'>
+                            <%= post.posteoUsuario.nombre %>
+                        </a>
+                    </p>
+                </div>
+                <div class="detallePosteo">
+                    <img class="photo" src= "<%= post.foto %>" alt="">
+                    <p><%= post.pie %></p>
+                </div>
+                
+            </section>
+                    
+            <section class="right">
+                <h4>Comentarios</h4>
+                <section class="comments">
+                    <% if (locals.user != undefined) { %>
+                        <form action="/posteos/agregarCom/id/<%= post.id_posteo %>" class="comment-form" method = "POST">
+                            <input type="text" class="input" name= "comment" placeholder="Agregar comentario">
+                            <button type="submit">Comentar</button>
+                        </form>
+                    <% } %>
+                    
+                            
+                    <div>
+                        <% for( let i=0; i < post.posteoComentario.length; i++ ) { %>
+                            <article class="comment">
+                                <img src="<%= post.posteoComentario[i].comentarioUsuario.foto %>" alt="">
+                                <section class="content">
+                                    <a class="user" href="/usuarios/detalleUsuario/id/<%= post.posteoComentario[i].comentarioUsuario.id_usuario%>">
+                                        <strong> <%= post.posteoComentario[i].comentarioUsuario.nombre%>:</strong>
+                                    </a>
+                                    <span class="text"><%= post.posteoComentario[i].texto %></span>
+                                </section>
+                            </article>
+                        <% }%>    
+                    </div>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <%- include('./partials/footer') %>
+
+</body>
+
+</html>

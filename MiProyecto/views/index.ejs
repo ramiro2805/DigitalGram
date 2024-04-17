@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body>
+    <% if (locals.user != null) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/headerDeslogueado') %>
+    <% } %>
+
+    <main>
+        <section class="center main-content">
+            <% for( let i=0; i < posteo.length; i++ ) { %>
+                <article class="post">
+                    <div class="info-usuario ">
+                        <img src="<%= posteo[i].posteoUsuario.foto%>" alt="">
+                        <h4>
+                            <a href='/usuarios/detalleUsuario/id/<%= posteo[i].posteoUsuario.id_usuario %>'> <%= posteo[i].posteoUsuario.nombre%></a>
+                        </h4>
+                    </div>
+                
+                    <div class="post-body">
+                        <a href="/posteos/detallePost/id/<%= posteo[i].id_posteo %>">
+                            <img src="<%= posteo[i].foto %>" alt="">
+                        </a>
+                        <h4><strong><%= posteo[i].posteoUsuario.nombre%></strong>:</h4>
+                        <p> <%= posteo[i].pie%></p>
+                    </div>
+                        
+                    <ul class="post-reacciones">
+                        <li>
+                            <i class="fa-regular fa-heart"></i>
+                        </li>
+                        <li>
+                            <i class="fa-regular fa-comment"></i>
+                        </li>
+                    </ul>
+                
+                   <div class="post-comentarios">
+                        <h4>Comentarios</h4>
+                            <% for( let j=0; j < posteo[i].posteoComentario.length ; j++ ) { %>
+                                <div>
+                                    <h4>
+                                        <a href="/usuarios/detalleUsuario/id/<%= posteo[i].posteoComentario[j].comentarioUsuario.id_usuario%>">
+                                            <strong> <%= posteo[i].posteoComentario[j].comentarioUsuario.nombre%>:</strong>
+                                        </a>
+                                    </h4>
+                                    <p><%= posteo[i].posteoComentario[j].texto %></p>
+    
+                                </div>
+                            <% } %>
+                    </div> 
+                </article>
+            <% } %>        
+        </section>
+    </main>
+
+    <%- include('./partials/footer') %>
+
+</body>
+
+</html>
